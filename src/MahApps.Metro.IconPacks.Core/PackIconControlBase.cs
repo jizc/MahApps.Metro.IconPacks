@@ -399,5 +399,50 @@ namespace MahApps.Metro.IconPacks
             get { return (bool)this.GetValue(SpinAutoReverseProperty); }
             set { this.SetValue(SpinAutoReverseProperty, value); }
         }
+
+        /// <summary>
+        /// Identifies the Stroke dependency property.
+        /// </summary>
+        public static readonly DependencyProperty StrokeProperty
+            = DependencyProperty.Register(
+                nameof(Stroke),
+                typeof(Brush),
+                typeof(PackIconControlBase),
+                new FrameworkPropertyMetadata(
+                    null,
+                    FrameworkPropertyMetadataOptions.AffectsMeasure
+                    | FrameworkPropertyMetadataOptions.AffectsRender
+                    | FrameworkPropertyMetadataOptions.SubPropertiesDoNotAffectRender));
+
+        /// <summary>
+        /// Gets or sets the Stroke property
+        /// </summary>
+        public Brush Stroke
+        {
+            get { return (Brush)this.GetValue(StrokeProperty); }
+            set { this.SetValue(StrokeProperty, value); }
+        }
+
+        /// <summary>
+        /// Identifies the StrokeThickness dependency property.
+        /// </summary>
+        public static readonly DependencyProperty StrokeThicknessProperty
+            = DependencyProperty.Register(
+                nameof(StrokeThickness),
+                typeof(double),
+                typeof(PackIconControlBase),
+                new FrameworkPropertyMetadata(
+                    0d,
+                    FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender));
+
+        /// <summary>
+        /// Gets or sets the StrokeThickness property
+        /// </summary>
+        [TypeConverter(typeof(LengthConverter))]
+        public double StrokeThickness
+        {
+            get { return (double)this.GetValue(StrokeThicknessProperty); }
+            set { this.SetValue(StrokeThicknessProperty, value); }
+        }
     }
 }
