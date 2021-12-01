@@ -23,6 +23,16 @@ namespace MahApps.Metro.IconPacks.Converter
         public double RotationAngle { get; set; } = 0d;
 
         /// <summary>
+        /// Gets or sets the brush to draw the icon stroke.
+        /// </summary>
+        public Brush Stroke { get; set; }
+
+        /// <summary>
+        /// Gets or sets the stroke thickness for the icon.
+        /// </summary>
+        public double StrokeThickness { get; set; } = 0d;
+
+        /// <summary>
         /// Gets the path data for the given kind.
         /// </summary>
         protected abstract string GetPathData(object iconKind);
@@ -63,6 +73,11 @@ namespace MahApps.Metro.IconPacks.Converter
                 Geometry = Geometry.Parse(path),
                 Brush = foregroundBrush
             };
+
+            if (Stroke is { } stroke && StrokeThickness > 0d)
+            {
+                geometryDrawing.Pen = new Pen(stroke, StrokeThickness);
+            }
 
             var drawingGroup = new DrawingGroup
             {

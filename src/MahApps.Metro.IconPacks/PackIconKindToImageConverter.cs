@@ -145,7 +145,8 @@ namespace MahApps.Metro.IconPacks.Converter
 
             if (iconKind is PackIconFeatherIconsKind)
             {
-                var pen = new Pen(foregroundBrush, 2d)
+                var thickness = StrokeThickness > 0d ? StrokeThickness : 2d;
+                var pen = new Pen(foregroundBrush, thickness)
                 {
                     StartLineCap = PenLineCap.Round,
                     EndLineCap = PenLineCap.Round,
@@ -156,6 +157,10 @@ namespace MahApps.Metro.IconPacks.Converter
             else
             {
                 geometryDrawing.Brush = foregroundBrush;
+                if (Stroke is { } stroke && StrokeThickness > 0d)
+                {
+                    geometryDrawing.Pen = new Pen(stroke, StrokeThickness);
+                }
             }
 
             var drawingGroup = new DrawingGroup

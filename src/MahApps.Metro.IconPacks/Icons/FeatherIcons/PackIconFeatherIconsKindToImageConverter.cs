@@ -23,7 +23,8 @@ namespace MahApps.Metro.IconPacks.Converter
                 Geometry = Geometry.Parse(path)
             };
 
-            var pen = new Pen(foregroundBrush, 2d)
+            var thickness = StrokeThickness > 0d ? StrokeThickness : 2d;
+            var pen = new Pen(foregroundBrush, thickness)
             {
                 StartLineCap = PenLineCap.Round,
                 EndLineCap = PenLineCap.Round,
