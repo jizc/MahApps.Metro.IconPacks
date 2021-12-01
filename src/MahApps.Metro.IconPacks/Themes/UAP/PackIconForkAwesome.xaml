@@ -28,6 +28,8 @@
                           Stretch="Uniform"
                           Data="{Binding Data, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={converter:NullToUnsetValueConverter}}"
                           RenderTransformOrigin="0.5 0.5"
+                          Stroke="{TemplateBinding Stroke}"
+                          StrokeThickness="{TemplateBinding StrokeThickness}"
                           UseLayoutRounding="False">
                         <Path.RenderTransform>
                             <ScaleTransform ScaleY="-1" />

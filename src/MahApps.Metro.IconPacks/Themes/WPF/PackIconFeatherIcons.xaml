@@ -25,8 +25,8 @@
                     </TransformGroup>
                 </Grid.RenderTransform>
                 <Viewbox Margin="{TemplateBinding Padding}">
-                    <Path Stroke="{TemplateBinding Foreground}"
-                          StrokeThickness="2"
+                    <Path Stroke="{TemplateBinding Stroke}"
+                          StrokeThickness="{TemplateBinding StrokeThickness}"
                           StrokeStartLineCap="Round"
                           StrokeEndLineCap="Round"
                           StrokeLineJoin="Round"
@@ -54,6 +54,8 @@
         <Setter Property="Template" Value="{StaticResource MahApps.Templates.PackIconFeatherIcons}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="Stroke" Value="{Binding Foreground, RelativeSource={RelativeSource Self}}" />
+        <Setter Property="StrokeThickness" Value="2" />
     </Style>
 
 </ResourceDictionary>

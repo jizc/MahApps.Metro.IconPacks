@@ -31,6 +31,8 @@
                           Stretch="Uniform"
                           Data="{Binding Data, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={converter:NullToUnsetValueConverter}}"
                           SnapsToDevicePixels="False"
+                          Stroke="{TemplateBinding Stroke}"
+                          StrokeThickness="{TemplateBinding StrokeThickness}"
                           UseLayoutRounding="False" />
                 </Viewbox>
             </Grid>
@@ -73,14 +75,26 @@
             </DataTrigger>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Kind, Converter={converter:DataTypeValueConverter}}" Value="{x:Type iconPacks:PackIconFeatherIconsKind}">
                 <Setter TargetName="PART_IconPath" Property="Fill" Value="{x:Null}" />
-                <Setter TargetName="PART_IconPath" Property="Stroke" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground, Mode=OneWay}" />
-                <Setter TargetName="PART_IconPath" Property="StrokeThickness" Value="2" />
                 <Setter TargetName="PART_IconPath" Property="StrokeStartLineCap" Value="Round" />
                 <Setter TargetName="PART_IconPath" Property="StrokeEndLineCap" Value="Round" />
                 <Setter TargetName="PART_IconPath" Property="StrokeLineJoin" Value="Round" />
                 <Setter TargetName="PART_IconPath" Property="Width" Value="24" />
                 <Setter TargetName="PART_IconPath" Property="Height" Value="24" />
             </DataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Kind, Converter={converter:DataTypeValueConverter}}" Value="{x:Type iconPacks:PackIconFeatherIconsKind}" />
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Stroke}" Value="{x:Null}" />
+                </MultiDataTrigger.Conditions>
+                <Setter TargetName="PART_IconPath" Property="Stroke" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground, Mode=OneWay}" />
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Kind, Converter={converter:DataTypeValueConverter}}" Value="{x:Type iconPacks:PackIconFeatherIconsKind}" />
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=StrokeThickness}" Value="0" />
+                </MultiDataTrigger.Conditions>
+                <Setter TargetName="PART_IconPath" Property="StrokeThickness" Value="2" />
+            </MultiDataTrigger>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Kind, Converter={converter:DataTypeValueConverter}}" Value="{x:Type iconPacks:PackIconFileIconsKind}">
                 <Setter TargetName="PART_IconPath" Property="LayoutTransform">
                     <Setter.Value>

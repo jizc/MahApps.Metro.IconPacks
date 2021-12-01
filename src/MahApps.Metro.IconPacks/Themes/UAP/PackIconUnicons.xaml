@@ -27,6 +27,8 @@
                     <Path Fill="{TemplateBinding Foreground}"
                           Stretch="Uniform"
                           Data="{Binding Data, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={converter:NullToUnsetValueConverter}}"
+                          Stroke="{TemplateBinding Stroke}"
+                          StrokeThickness="{TemplateBinding StrokeThickness}"
                           UseLayoutRounding="False" />
                 </Viewbox>
             </Grid>

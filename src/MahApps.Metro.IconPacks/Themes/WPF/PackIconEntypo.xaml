@@ -29,6 +29,8 @@
                           Stretch="Uniform"
                           Data="{Binding Data, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={converter:NullToUnsetValueConverter}}"
                           SnapsToDevicePixels="False"
+                          Stroke="{TemplateBinding Stroke}"
+                          StrokeThickness="{TemplateBinding StrokeThickness}"
                           UseLayoutRounding="False" />
                 </Viewbox>
             </Grid>
