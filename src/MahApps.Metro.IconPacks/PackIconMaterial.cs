@@ -24,8 +24,8 @@ namespace MahApps.Metro.IconPacks
         /// </summary>
         public PackIconMaterialKind Kind
         {
-            get { return (PackIconMaterialKind)GetValue(KindProperty); }
-            set { SetValue(KindProperty, value); }
+            get => (PackIconMaterialKind)GetValue(KindProperty);
+            set => SetValue(KindProperty, value);
         }
 
         static PackIconMaterial()
@@ -35,20 +35,20 @@ namespace MahApps.Metro.IconPacks
 
         protected override void SetKind<TKind>(TKind iconKind)
         {
-            this.SetCurrentValue(KindProperty, iconKind);
+            SetCurrentValue(KindProperty, iconKind);
         }
 
         protected override void UpdateData()
         {
-            if (Kind != default(PackIconMaterialKind))
+            if (Kind != default)
             {
                 string data = null;
                 PackIconMaterialDataFactory.DataIndex.Value?.TryGetValue(Kind, out data);
-                this.Data = data;
+                Data = data;
             }
             else
             {
-                this.Data = null;
+                Data = null;
             }
         }
     }

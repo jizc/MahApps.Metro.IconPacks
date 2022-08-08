@@ -4,7 +4,7 @@ using System.Windows.Markup;
 namespace MahApps.Metro.IconPacks
 {
     [MarkupExtensionReturnType(typeof(PackIconMaterial))]
-    public class MaterialExtension : BasePackIconExtension
+    public class MaterialExtension : PackIconExtensionBase
     {
         public MaterialExtension()
         {
@@ -12,7 +12,7 @@ namespace MahApps.Metro.IconPacks
 
         public MaterialExtension(PackIconMaterialKind kind)
         {
-            this.Kind = kind;
+            Kind = kind;
         }
 
         [ConstructorArgument("kind")]

@@ -1,16 +1,9 @@
 ﻿using System;
-#if NETFX_CORE || WINDOWS_UWP
-using System.Linq;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Animation;
-#else
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-#endif
 
 namespace MahApps.Metro.IconPacks
 {
@@ -21,8 +14,8 @@ namespace MahApps.Metro.IconPacks
     {
         static PackIconControlBase()
         {
-            OpacityProperty.OverrideMetadata(typeof(PackIconControlBase), new UIPropertyMetadata(1d, (d, e) => { d.CoerceValue(SpinProperty); }));
-            VisibilityProperty.OverrideMetadata(typeof(PackIconControlBase), new UIPropertyMetadata(Visibility.Visible, (d, e) => { d.CoerceValue(SpinProperty); }));
+            OpacityProperty.OverrideMetadata(typeof(PackIconControlBase), new UIPropertyMetadata(1d, (d, _) => { d.CoerceValue(SpinProperty); }));
+            VisibilityProperty.OverrideMetadata(typeof(PackIconControlBase), new UIPropertyMetadata(Visibility.Visible, (d, _) => { d.CoerceValue(SpinProperty); }));
         }
 
         private static readonly DependencyPropertyKey DataPropertyKey
@@ -37,22 +30,22 @@ namespace MahApps.Metro.IconPacks
         [TypeConverter(typeof(GeometryConverter))]
         public string Data
         {
-            get { return (string)GetValue(DataProperty); }
-            protected set { SetValue(DataPropertyKey, value); }
+            get => (string)GetValue(DataProperty);
+            protected set => SetValue(DataPropertyKey, value);
         }
 
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
-            this.UpdateData();
+            UpdateData();
 
-            this.CoerceValue(SpinProperty);
+            CoerceValue(SpinProperty);
 
-            if (this.Spin)
+            if (Spin)
             {
-                this.StopSpinAnimation();
-                this.BeginSpinAnimation();
+                StopSpinAnimation();
+                BeginSpinAnimation();
             }
         }
 
@@ -71,8 +64,8 @@ namespace MahApps.Metro.IconPacks
         /// </summary>
         public PackIconFlipOrientation Flip
         {
-            get { return (PackIconFlipOrientation)this.GetValue(FlipProperty); }
-            set { this.SetValue(FlipProperty, value); }
+            get => (PackIconFlipOrientation)GetValue(FlipProperty);
+            set => SetValue(FlipProperty, value);
         }
 
         /// <summary>
@@ -83,7 +76,7 @@ namespace MahApps.Metro.IconPacks
                 nameof(RotationAngle),
                 typeof(double),
                 typeof(PackIconControlBase),
-                new PropertyMetadata(0d, null, (dependencyObject, value) =>
+                new PropertyMetadata(0d, null, (_, value) =>
                 {
                     var val = (double)value;
                     return val < 0 ? 0d : (val > 360 ? 360d : value);
@@ -95,8 +88,8 @@ namespace MahApps.Metro.IconPacks
         /// <value>The rotation.</value>
         public double RotationAngle
         {
-            get { return (double)this.GetValue(RotationAngleProperty); }
-            set { this.SetValue(RotationAngleProperty, value); }
+            get => (double)GetValue(RotationAngleProperty);
+            set => SetValue(RotationAngleProperty, value);
         }
 
         /// <summary>
@@ -115,14 +108,15 @@ namespace MahApps.Metro.IconPacks
             {
                 return false;
             }
+
             return value;
         }
 
         private static void SpinPropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
-            if (dependencyObject is PackIconControlBase packIcon && e.OldValue != e.NewValue && e.NewValue is bool)
+            if (dependencyObject is PackIconControlBase packIcon && e.OldValue != e.NewValue && e.NewValue is bool newBool)
             {
-                packIcon.ToggleSpinAnimation((bool)e.NewValue);
+                packIcon.ToggleSpinAnimation(newBool);
             }
         }
 
@@ -132,37 +126,38 @@ namespace MahApps.Metro.IconPacks
         /// <value><c>true</c> if spin; otherwise, <c>false</c>.</value>
         public bool Spin
         {
-            get { return (bool)this.GetValue(SpinProperty); }
-            set { this.SetValue(SpinProperty, value); }
+            get => (bool)GetValue(SpinProperty);
+            set => SetValue(SpinProperty, value);
         }
 
         private void ToggleSpinAnimation(bool spin)
         {
             if (spin)
             {
-                this.BeginSpinAnimation();
+                BeginSpinAnimation();
             }
             else
             {
-                this.StopSpinAnimation();
+                StopSpinAnimation();
             }
         }
 
         private Storyboard spinningStoryboard;
-        private FrameworkElement _innerGrid;
-        private FrameworkElement InnerGrid => this._innerGrid ?? (this._innerGrid = this.GetTemplateChild("PART_InnerGrid") as FrameworkElement);
+        private FrameworkElement innerGrid;
+        private FrameworkElement InnerGrid => innerGrid ??= GetTemplateChild("PART_InnerGrid") as FrameworkElement;
 
         private void BeginSpinAnimation()
         {
-            var element = this.InnerGrid;
-            if (null == element)
+            var element = InnerGrid;
+            if (element is null)
             {
                 return;
             }
+
             var transformGroup = element.RenderTransform as TransformGroup ?? new TransformGroup();
             var rotateTransform = transformGroup.Children.OfType<RotateTransform>().LastOrDefault();
 
-            if (rotateTransform != null)
+            if (rotateTransform is not null)
             {
                 rotateTransform.Angle = 0;
             }
@@ -176,10 +171,10 @@ namespace MahApps.Metro.IconPacks
             {
                 From = 0,
                 To = 360,
-                AutoReverse = this.SpinAutoReverse,
-                EasingFunction = this.SpinEasingFunction,
+                AutoReverse = SpinAutoReverse,
+                EasingFunction = SpinEasingFunction,
                 RepeatBehavior = RepeatBehavior.Forever,
-                Duration = new Duration(TimeSpan.FromSeconds(this.SpinDuration))
+                Duration = new Duration(TimeSpan.FromSeconds(SpinDuration))
             };
 
             var storyboard = new Storyboard();
@@ -229,8 +224,8 @@ namespace MahApps.Metro.IconPacks
         /// <value>The duration of the spin in seconds.</value>
         public double SpinDuration
         {
-            get { return (double)this.GetValue(SpinDurationProperty); }
-            set { this.SetValue(SpinDurationProperty, value); }
+            get => (double)GetValue(SpinDurationProperty);
+            set => SetValue(SpinDurationProperty, value);
         }
 
         /// <summary>
@@ -258,8 +253,8 @@ namespace MahApps.Metro.IconPacks
         /// <value>The spin easing function.</value>
         public IEasingFunction SpinEasingFunction
         {
-            get { return (IEasingFunction)this.GetValue(SpinEasingFunctionProperty); }
-            set { this.SetValue(SpinEasingFunctionProperty, value); }
+            get => (IEasingFunction)GetValue(SpinEasingFunctionProperty);
+            set => SetValue(SpinEasingFunctionProperty, value);
         }
 
         /// <summary>
@@ -287,8 +282,8 @@ namespace MahApps.Metro.IconPacks
         /// <value><c>true</c> if [spin automatic reverse]; otherwise, <c>false</c>.</value>
         public bool SpinAutoReverse
         {
-            get { return (bool)this.GetValue(SpinAutoReverseProperty); }
-            set { this.SetValue(SpinAutoReverseProperty, value); }
+            get => (bool)GetValue(SpinAutoReverseProperty);
+            set => SetValue(SpinAutoReverseProperty, value);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace MahApps.Metro.IconPacks.Converter
+﻿using MahApps.Metro.IconPacks.Converter;
+
+namespace MahApps.Metro.IconPacks
 {
     public class PackIconMaterialKindToImageConverter : PackIconKindToImageConverterBase
     {

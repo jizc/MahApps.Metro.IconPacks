@@ -5,7 +5,7 @@ using System.Windows.Media;
 namespace MahApps.Metro.IconPacks
 {
     [MarkupExtensionReturnType(typeof(ImageSource))]
-    public class MaterialImageExtension : BasePackIconImageExtension
+    public class MaterialImageExtension : PackIconImageExtensionBase
     {
         public MaterialImageExtension()
         {
@@ -13,7 +13,7 @@ namespace MahApps.Metro.IconPacks
 
         public MaterialImageExtension(PackIconMaterialKind kind)
         {
-            this.Kind = kind;
+            Kind = kind;
         }
 
         [ConstructorArgument("kind")]
@@ -21,7 +21,7 @@ namespace MahApps.Metro.IconPacks
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            return CreateImageSource(this.Kind, this.Brush ?? Brushes.Black);
+            return CreateImageSource(Kind, Brush ?? Brushes.Black);
         }
 
         /// <inheritdoc />

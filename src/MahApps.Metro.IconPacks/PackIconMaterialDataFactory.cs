@@ -13,7 +13,7 @@ namespace MahApps.Metro.IconPacks
 
         static PackIconMaterialDataFactory()
         {
-            if (DataIndex == null)
+            if (DataIndex is null)
             {
                 DataIndex = new Lazy<IDictionary<PackIconMaterialKind, string>>(PackIconMaterialDataFactory.Create);
             }
