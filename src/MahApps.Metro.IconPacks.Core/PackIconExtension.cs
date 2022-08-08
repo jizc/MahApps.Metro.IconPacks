@@ -1,14 +1,6 @@
 ﻿using System;
-#if (NETFX_CORE || WINDOWS_UWP)
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Markup;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Animation;
-#else
 using System.Windows.Markup;
 using System.Windows.Media.Animation;
-
-#endif
 
 namespace MahApps.Metro.IconPacks
 {
@@ -20,11 +12,7 @@ namespace MahApps.Metro.IconPacks
         double RotationAngle { get; set; }
         bool Spin { get; set; }
         bool SpinAutoReverse { get; set; }
-#if (NETFX_CORE || WINDOWS_UWP)
-        EasingFunctionBase SpinEasingFunction { get; set; }
-#else
         IEasingFunction SpinEasingFunction { get; set; }
-#endif
         double SpinDuration { get; set; }
     }
 
@@ -79,11 +67,7 @@ namespace MahApps.Metro.IconPacks
         }
     }
 
-#if (NETFX_CORE || WINDOWS_UWP)
-    [MarkupExtensionReturnType(ReturnType = typeof(PackIconBase))]
-#else
     [MarkupExtensionReturnType(typeof(PackIconBase))]
-#endif
     public abstract class BasePackIconExtension : MarkupExtension, IPackIconExtension
     {
         private double _width = 16d;
@@ -188,15 +172,9 @@ namespace MahApps.Metro.IconPacks
             }
         }
 
-#if (NETFX_CORE || WINDOWS_UWP)
-        private EasingFunctionBase _spinEasingFunction = null;
-
-        public EasingFunctionBase SpinEasingFunction
-#else
         private IEasingFunction _spinEasingFunction = null;
 
         public IEasingFunction SpinEasingFunction
-#endif
         {
             get => _spinEasingFunction;
             set
