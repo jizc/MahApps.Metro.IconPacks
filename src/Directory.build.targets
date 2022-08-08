@@ -1,34 +1,14 @@
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project>
 
-    <!-- AssemblyInfo -->
     <PropertyGroup>
         <Company>MahApps</Company>
         <Product>MahApps.Metro.IconPacks</Product>
         <Copyright>Copyright © 2016 - $([System.DateTime]::Today.ToString(yyyy)) MahApps.Metro</Copyright>
-        <Description>IconPacks for stylish awesome WPF and UWP applications.</Description>
-        <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+        <Description>Material Design icon pack for stylish awesome WPF applications.</Description>
         <Version>4.0.0.0</Version>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
         <FileVersion>4.0.0.0</FileVersion>
         <InformationalVersion>4.0.0.0</InformationalVersion>
     </PropertyGroup>
-
-    <!-- Workaround. Remove once we're on 3.1.300+
-    https://github.com/dotnet/sourcelink/issues/572 -->
-    <PropertyGroup>
-        <TargetFrameworkMonikerAssemblyAttributesPath>$([System.IO.Path]::Combine('$(IntermediateOutputPath)','$(TargetFrameworkMoniker).AssemblyAttributes$(DefaultLanguageSourceExtension)'))</TargetFrameworkMonikerAssemblyAttributesPath>
-    </PropertyGroup>
-    <ItemGroup>
-        <EmbeddedFiles Include="$(GeneratedAssemblyInfoFile)"/>
-    </ItemGroup>
-
-    <!-- Workaround for https://github.com/dotnet/sdk/issues/11105 -->
-    <ItemGroup>
-        <SourceRoot Include="$(NuGetPackageRoot)" Condition="'$(NuGetPackageRoot)' != ''" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <Page Update="@(Page)" SubType="Designer" Generator="MSBuild:Compile" />
-    </ItemGroup>
 
 </Project>
