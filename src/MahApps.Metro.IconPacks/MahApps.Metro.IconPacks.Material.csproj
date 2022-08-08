@@ -1,13 +1,16 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="MSBuild.Sdk.Extras">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
     <PropertyGroup>
-        <DefineConstants>$(DefineConstants);MATERIAL</DefineConstants>
-        <IconsName>Material</IconsName>
+        <OutputType>Library</OutputType>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <UseWpf>true</UseWpf>
         <AssemblyName>MahApps.Metro.IconPacks.Material</AssemblyName>
         <Title>MahApps.Metro.IconPacks.Material</Title>
         <RootNamespace>MahApps.Metro.IconPacks</RootNamespace>
     </PropertyGroup>
+
     <ItemGroup>
       <ProjectReference Include="..\MahApps.Metro.IconPacks.Core\MahApps.Metro.IconPacks.Core.csproj" />
     </ItemGroup>
+
 </Project>

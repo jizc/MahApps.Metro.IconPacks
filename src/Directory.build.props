@@ -1,16 +1,7 @@
 <Project>
 
-    <PropertyGroup>
-        <TargetFrameworks>net6.0-windows</TargetFrameworks>
-        <UseWpf>true</UseWpf>
-    </PropertyGroup>
-
     <ItemGroup>
         <PackageReference Include="JetBrains.Annotations" Version="2022.*" PrivateAssets="All" IncludeAssets="build;compile" />
-        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.*">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-        </PackageReference>
     </ItemGroup>
 
 </Project>
