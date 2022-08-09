@@ -88,5 +88,3 @@ File.WriteAllText(solutionDir + @"src\MahApps.Metro.IconPacks\PackIconMaterialKi
 Console.WriteLine("Generating json...");
 var json = System.Text.Json.JsonSerializer.Serialize(icons);
 File.WriteAllText(solutionDir + @"src\MahApps.Metro.IconPacks\Resources\PackIconMaterialData.json", json);
-
-internal record IconData(string Name, string Path);
