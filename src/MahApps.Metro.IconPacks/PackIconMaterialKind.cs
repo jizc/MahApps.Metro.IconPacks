@@ -1658,8 +1658,6 @@ public enum PackIconMaterialKind
     Chat,
     CheckAll,
     CheckBold,
-    CheckBoxMultipleOutline,
-    CheckBoxOutline,
     CheckCircleOutline,
     CheckCircle,
     CheckDecagramOutline,

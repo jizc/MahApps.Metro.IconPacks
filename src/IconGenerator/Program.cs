@@ -51,7 +51,7 @@ INSERT_HERE}
 const string solutionDir = @"..\..\..\..\..\";
 const string svgDir = solutionDir + @"..\MaterialDesignSvgo\svg";
 
-var icons = new List<IconData> { new("None", string.Empty) };
+var icons = new Dictionary<string, string> { { "None", string.Empty } };
 
 Console.WriteLine("Reading icon data...");
 
@@ -61,7 +61,7 @@ foreach (var path in Directory.EnumerateFiles(svgDir))
     var text = File.ReadAllText(path);
     var svgIndex = text.IndexOf("path d=\"", StringComparison.Ordinal);
     var svg = text[(svgIndex + 8)..^9];
-    icons.Add(new IconData(ToCamelCase(fileName), svg));
+    icons[ToCamelCase(fileName)] = svg;
 
     if (icons.Count % 500 is 0)
     {
@@ -69,13 +69,16 @@ foreach (var path in Directory.EnumerateFiles(svgDir))
     }
 }
 
+icons.Remove("CheckBoxMultipleOutline");
+icons.Remove("CheckBoxOutline");
+
 Console.WriteLine("\nGenerating icon kind...");
 
 var stringBuilder = new System.Text.StringBuilder();
 
-foreach (var icon in icons)
+foreach (var icon in icons.Keys)
 {
-    stringBuilder.AppendLine($"    {icon.Name},");
+    stringBuilder.AppendLine($"    {icon},");
 }
 
 var contents = kindTemplate.Replace("INSERT_HERE", stringBuilder.ToString());
@@ -83,8 +86,7 @@ stringBuilder.Clear();
 File.WriteAllText(solutionDir + @"src\MahApps.Metro.IconPacks\PackIconMaterialKind.cs", contents);
 
 Console.WriteLine("Generating json...");
-var dictionary = icons.ToDictionary(icon => icon.Name, icon => icon.Path);
-var json = System.Text.Json.JsonSerializer.Serialize(dictionary);
+var json = System.Text.Json.JsonSerializer.Serialize(icons);
 File.WriteAllText(solutionDir + @"src\MahApps.Metro.IconPacks\Resources\PackIconMaterialData.json", json);
 
 internal record IconData(string Name, string Path);
