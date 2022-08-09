@@ -8,6 +8,27 @@ namespace MahApps.Metro.IconPacks;
 public abstract class PackIconExtensionBase : MarkupExtension, IPackIconExtension
 {
     private double width = 16d;
+    private double height = 16d;
+    private PackIconFlipOrientation flip = PackIconFlipOrientation.Normal;
+    private double rotationAngle;
+    private bool spin;
+    private bool spinAutoReverse;
+    private IEasingFunction spinEasingFunction;
+    private double spinDuration = 1d;
+    private ChangedFieldFlags changedField; // Cache changed field bits
+
+    [Flags]
+    internal enum ChangedFieldFlags : ushort
+    {
+        Width = 0x0001,
+        Height = 0x0002,
+        Flip = 0x0004,
+        RotationAngle = 0x0008,
+        Spin = 0x0010,
+        SpinAutoReverse = 0x0020,
+        SpinEasingFunction = 0x0040,
+        SpinDuration = 0x0080
+    }
 
     public double Width
     {
@@ -24,8 +45,6 @@ public abstract class PackIconExtensionBase : MarkupExtension, IPackIconExtensio
         }
     }
 
-    private double height = 16d;
-
     public double Height
     {
         get => height;
@@ -40,8 +59,6 @@ public abstract class PackIconExtensionBase : MarkupExtension, IPackIconExtensio
             WriteFieldChangedFlag(ChangedFieldFlags.Height, true);
         }
     }
-
-    private PackIconFlipOrientation flip = PackIconFlipOrientation.Normal;
 
     public PackIconFlipOrientation Flip
     {
@@ -58,8 +75,6 @@ public abstract class PackIconExtensionBase : MarkupExtension, IPackIconExtensio
         }
     }
 
-    private double rotationAngle;
-
     public double RotationAngle
     {
         get => rotationAngle;
@@ -74,8 +89,6 @@ public abstract class PackIconExtensionBase : MarkupExtension, IPackIconExtensio
             WriteFieldChangedFlag(ChangedFieldFlags.RotationAngle, true);
         }
     }
-
-    private bool spin;
 
     public bool Spin
     {
@@ -92,8 +105,6 @@ public abstract class PackIconExtensionBase : MarkupExtension, IPackIconExtensio
         }
     }
 
-    private bool spinAutoReverse;
-
     public bool SpinAutoReverse
     {
         get => spinAutoReverse;
@@ -108,8 +119,6 @@ public abstract class PackIconExtensionBase : MarkupExtension, IPackIconExtensio
             WriteFieldChangedFlag(ChangedFieldFlags.SpinAutoReverse, true);
         }
     }
-
-    private IEasingFunction spinEasingFunction;
 
     public IEasingFunction SpinEasingFunction
     {
@@ -126,8 +135,6 @@ public abstract class PackIconExtensionBase : MarkupExtension, IPackIconExtensio
         }
     }
 
-    private double spinDuration = 1d;
-
     public double SpinDuration
     {
         get => spinDuration;
@@ -143,8 +150,6 @@ public abstract class PackIconExtensionBase : MarkupExtension, IPackIconExtensio
         }
     }
 
-    private ChangedFieldFlags changedField; // Cache changed field bits
-
     internal bool IsFieldChanged(ChangedFieldFlags reqFlag) => (changedField & reqFlag) is not 0;
 
     internal void WriteFieldChangedFlag(ChangedFieldFlags reqFlag, bool set)
@@ -157,18 +162,5 @@ public abstract class PackIconExtensionBase : MarkupExtension, IPackIconExtensio
         {
             changedField &= (~reqFlag);
         }
-    }
-
-    [Flags]
-    internal enum ChangedFieldFlags : ushort
-    {
-        Width = 0x0001,
-        Height = 0x0002,
-        Flip = 0x0004,
-        RotationAngle = 0x0008,
-        Spin = 0x0010,
-        SpinAutoReverse = 0x0020,
-        SpinEasingFunction = 0x0040,
-        SpinDuration = 0x0080
     }
 }

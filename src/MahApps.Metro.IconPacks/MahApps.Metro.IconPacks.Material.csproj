@@ -10,6 +10,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <EmbeddedResource Include="Resources\PackIconMaterialData.json">
+          <LogicalName>PackIconMaterialData.json</LogicalName>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
       <ProjectReference Include="..\MahApps.Metro.IconPacks.Core\MahApps.Metro.IconPacks.Core.csproj" />
     </ItemGroup>
 

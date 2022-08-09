@@ -1,18 +1,18 @@
 ﻿using MahApps.Metro.IconPacks.Converter;
 
-namespace MahApps.Metro.IconPacks
+namespace MahApps.Metro.IconPacks;
+
+public class PackIconMaterialKindToImageConverter : PackIconKindToImageConverterBase
 {
-    public class PackIconMaterialKindToImageConverter : PackIconKindToImageConverterBase
+    /// <inheritdoc />
+    protected override string GetPathData(object iconKind)
     {
-        /// <inheritdoc />
-        protected override string GetPathData(object iconKind)
+        string data = null;
+        if (iconKind is PackIconMaterialKind kind)
         {
-            string data = null;
-            if (iconKind is PackIconMaterialKind kind)
-            {
-                PackIconMaterialDataFactory.DataIndex.Value?.TryGetValue(kind, out data);
-            }
-            return data;
+            PackIconMaterialDataFactory.DataIndex.Value?.TryGetValue(kind, out data);
         }
+
+        return data;
     }
 }
