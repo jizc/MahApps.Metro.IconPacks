@@ -72,6 +72,7 @@ foreach (var path in Directory.EnumerateFiles(svgDir))
 icons.Remove("CheckBoxMultipleOutline");
 icons.Remove("CheckBoxOutline");
 
+Console.WriteLine($"Total icons: {icons.Count}");
 Console.WriteLine("\nGenerating icon kind...");
 
 var stringBuilder = new System.Text.StringBuilder();
