@@ -49,7 +49,7 @@ INSERT_HERE}
 ";
 
 const string solutionDir = @"..\..\..\..\..\";
-const string svgDir = solutionDir + @"..\MaterialDesignSvgo\svg";
+const string svgDir = solutionDir + @"..\..\MaterialDesignSvgo\svg";
 
 var icons = new Dictionary<string, string> { { "None", string.Empty } };
 
