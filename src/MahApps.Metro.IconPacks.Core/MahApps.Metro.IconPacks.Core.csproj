@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <OutputType>Library</OutputType>
-        <TargetFramework>net7.0-windows</TargetFramework>
+        <TargetFramework>net8.0-windows</TargetFramework>
         <UseWpf>true</UseWpf>
         <AssemblyName>MahApps.Metro.IconPacks.Core</AssemblyName>
         <Title>MahApps.Metro.IconPacks.Core</Title>

@@ -1,7 +1,7 @@
 <Project>
 
     <ItemGroup>
-        <PackageReference Include="JetBrains.Annotations" Version="2022.*" PrivateAssets="All" IncludeAssets="build;compile" />
+        <PackageReference Include="JetBrains.Annotations" Version="2023.*" PrivateAssets="All" IncludeAssets="build;compile" />
     </ItemGroup>
 
 </Project>
